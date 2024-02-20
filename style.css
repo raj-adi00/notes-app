@@ -1,0 +1,132 @@
+* {
+    box-sizing: border-box;
+}
+
+#greet {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 20px;
+    font-family: 'Anta';
+    color: transparent;
+    background: linear-gradient(58deg, #0b0004, #030a39de, #ac5967, #ff0000a1);
+    -webkit-background-clip: text;
+    font-stretch: ultra-expanded;
+    /* background-color: pink; */
+}
+
+#message {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-family: cursive;
+    color: #890a0a;
+    font-stretch: ultra-condensed;
+    background: pink;
+}
+
+/* Notes field */
+
+
+
+#notes-field {
+    background-color: pink;
+    font-family: 'Ubuntu';
+    display: grid;
+    padding: 2vw;
+    border-radius: 2vw;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5vw;
+    row-gap: 2vh;
+    min-height: 100vh;
+}
+
+.box {
+    width: 14vw;
+    height: 14vw;
+    background-color: white;
+    border-radius: 7%;
+}
+
+#box1 div {
+    border: 3px dotted pink;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    width: 6vw;
+    height: 6vw;
+    text-align: center;
+    align-items: center;
+}
+
+#box1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.3rem;
+
+}
+
+
+
+/* popup box */
+#pop-up {
+    border: 3px solid rgb(107 15 15);
+    padding: 2vw;
+    width: 30vw;
+    border-radius: 23px;
+    font-size: 1.5rem;
+    font-family: "Ubuntu";
+}
+
+.movement {
+    position: absolute;
+    top: -100%;
+    left: -100%;
+}
+
+.display {
+    position: absolute;
+    top: 35vh;
+    left: 35vw;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 45px 0 rgba(0, 0, 0, 0.2);
+}
+
+#pop-up label,
+#content,
+#header {
+    display: block;
+    margin: 5px;
+}
+
+#content,
+#header {
+    border: 2px solid rgb(117, 116, 116);
+    width: 25vw;
+    resize: none;
+}
+
+#header {
+    height: 5vh;
+    font-size: 1.3rem;
+    font-family: 'Ubuntu';
+}
+
+#content {
+    height: 25vh;
+    font-family: 'Ubuntu';
+}
+
+#content::-webkit-scrollbar {
+    display: none;
+}
