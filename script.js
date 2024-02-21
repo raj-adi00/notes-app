@@ -9,7 +9,7 @@ window.onload = () => {
     const title = [];
     const content = [];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const notes = [];
+    let notes = [];
 
     title_note.focus();
     content_note.focus();
@@ -34,7 +34,7 @@ window.onload = () => {
                 <h5>${val.heading}</h5>
                 <p>${val.body}</p>
                 </div>`;
-                document.getElementById("box1").insertAdjacentHTML("afterend",element);
+                document.getElementById("box1").insertAdjacentHTML("afterend", element);
             });
         }
     }
@@ -55,11 +55,12 @@ window.onload = () => {
                 body: content_note.value,
                 date_info: date + ' ' + month + ' ' + year
             };
+            notes=JSON.parse(localStorage.getItem("notes"));
             notes.push(note_info);
             localStorage.setItem("notes", JSON.stringify(notes));
             display();
         }
-       
+
         title_note.value = "";
         content_note.value = "";
         cover.style.transform = "scale(0)";
