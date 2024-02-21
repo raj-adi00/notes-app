@@ -34,7 +34,7 @@ window.onload = () => {
                 <h5>${val.heading}</h5>
                 <p>${val.body}</p>
                 </div>
-                <div class="bottom">
+                <div class="bottom-content">
                 <hr>
                 <span> ${val.date_info}</span>
                 <i class="fa-solid fa-ellipsis-vertical"></i>
