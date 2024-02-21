@@ -38,7 +38,7 @@
     display: flex;
     flex-wrap: wrap;
     column-gap: 5vw;
-    row-gap: 2vh;
+    row-gap: 10px;
     min-height: 100vh;
 }
 
@@ -161,18 +161,27 @@
     cursor: pointer;
     border: 2px solid black;
 }
-#pop-up h4{
+
+#pop-up h4 {
     margin-bottom: 0;
 }
-.box.item{
+
+.box.item {
     display: flex;
     flex-direction: column;
     padding: 15px;
+    justify-content: space-between;
 }
-.box.item h5{
+
+.box.item h5 {
     margin: 2px;
     font-size: 1.1rem;
 }
-.box.item p{
-   
+
+.bottom-content i {
+    float: right;
+}
+
+.bottom-content span {
+    font-size: 0.8rem;
 }

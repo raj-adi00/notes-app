@@ -10,7 +10,7 @@ window.onload = () => {
     const content = [];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let notes = [];
-
+    let dateobj;
     title_note.focus();
     content_note.focus();
 
@@ -22,17 +22,23 @@ window.onload = () => {
         title_note.value = "";
         content_note.value = "";
     });
-
-
+    // localStorage.clear();
     function display() {
         if (localStorage.getItem("notes") != null) {
-            let notes_view = JSON.parse(localStorage.getItem("notes") || "[]");
-            document.querySelectorAll('.item').forEach(function (e) { e.remove() });
+            let notes_view = JSON.parse(localStorage.getItem("notes"));
+            console.log(notes_view.date_info);
             notes_view.forEach((val, index) => {
                 console.log(val);
                 let element = `<div class='box item'>
+                <div class="upper">
                 <h5>${val.heading}</h5>
                 <p>${val.body}</p>
+                </div>
+                <div class="bottom">
+                <hr>
+                <span> ${val.date_info}</span>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
                 </div>`;
                 document.getElementById("box1").insertAdjacentHTML("afterend", element);
             });
@@ -40,12 +46,30 @@ window.onload = () => {
     }
     display();
 
-
+    function show() {
+        let notes_view = JSON.parse(localStorage.getItem("notes"));
+        let last_index = notes_view.length - 1;
+        let val = notes_view[last_index];
+        let element = `<div class='box item'>
+        <div class="upper">
+        <h5>${val.heading}</h5>
+        <p>${val.body}</p>
+        </div>
+        <div class="bottom">
+        <hr>
+        <div class="bottom-content">
+         <span> ${val.date_info}</span>
+         <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
+        </div>`;
+        console.log(notes_view);
+        document.getElementById("box1").insertAdjacentHTML("afterend", element);
+    }
     submit.addEventListener("click", () => {
         title.push(title_note.value);
         content.push(content_note.value);
         if (title_note.value || content_note.value) {
-            let dateobj = new Date();
+            dateobj = new Date();
             let month = months[dateobj.getMonth()];
             let year = dateobj.getFullYear();
             let date = dateobj.getDate();
@@ -55,10 +79,12 @@ window.onload = () => {
                 body: content_note.value,
                 date_info: date + ' ' + month + ' ' + year
             };
-            notes=JSON.parse(localStorage.getItem("notes"));
+            notes = JSON.parse(localStorage.getItem("notes"));
+            if (notes == null)
+                notes = [];
             notes.push(note_info);
             localStorage.setItem("notes", JSON.stringify(notes));
-            display();
+            show();
         }
 
         title_note.value = "";
