@@ -1,4 +1,12 @@
 window.onload = () => {
+    function showmenu(ele,a) {
+        console.log(1);
+        ele.parentElement.style.transform = "scale(1)";
+        document.addEventListener("click", function (e) {
+            if (e.target.tagName != "I" || e.target != ele)
+                ele.style.transform = "scale(0)";
+        });
+    }
     // console.log("fuck");
     const add_new = document.querySelector("#box1");
     const cover = document.querySelector(".movement");
@@ -29,7 +37,8 @@ window.onload = () => {
             console.log(notes_view.date_info);
             notes_view.forEach((val, index) => {
                 console.log(val);
-                let element = `<div class='box item'>
+                let element = `          
+                <div class='box item'>
                 <div class="upper">
                 <h5>${val.heading}</h5>
                 <p>${val.body}</p>
@@ -37,7 +46,11 @@ window.onload = () => {
                 <div class="bottom-content">
                 <hr>
                 <span> ${val.date_info}</span>
-                <i class="fa-solid fa-ellipsis-vertical"></i>
+                <ul class="menu">
+                <li> <i class="fa-regular fa-trash-can">Delete</i></li>
+                <li><i class="fa-regular fa-pen-to-square">Edit</i></li>
+                </ul>
+                <i class="fa-solid fa-ellipsis-vertical three-dots"></i>        
                 </div>
                 </div>`;
                 document.getElementById("box1").insertAdjacentHTML("afterend", element);
@@ -50,7 +63,8 @@ window.onload = () => {
         let notes_view = JSON.parse(localStorage.getItem("notes"));
         let last_index = notes_view.length - 1;
         let val = notes_view[last_index];
-        let element = `<div class='box item'>
+        let element = `
+        <div class='box item'>
         <div class="upper">
         <h5>${val.heading}</h5>
         <p>${val.body}</p>
@@ -59,7 +73,11 @@ window.onload = () => {
         <hr>
         <div class="bottom-content">
          <span> ${val.date_info}</span>
-         <i class="fa-solid fa-ellipsis-vertical"></i>
+         <ul class="menu">
+         <li> <i class="fa-regular fa-trash-can">Delete</i></li>
+         <li><i class="fa-regular fa-pen-to-square">Edit</i></li>
+         </ul>
+         <i class="fa-solid fa-ellipsis-vertical three-dots" ></i>
         </div>
         </div>`;
         console.log(notes_view);
@@ -92,4 +110,7 @@ window.onload = () => {
         cover.style.transform = "scale(0)";
     });
 
+    // menu
+
+    // document.addEventListener("click", (e) => { console.log(e.target) });
 }
