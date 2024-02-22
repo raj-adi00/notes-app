@@ -77,7 +77,7 @@ window.onload = () => {
          <li> <i class="fa-regular fa-trash-can">Delete</i></li>
          <li><i class="fa-regular fa-pen-to-square">Edit</i></li>
          </ul>
-         <i class="fa-solid fa-ellipsis-vertical three-dots" ></i>
+         <i class="fa-solid fa-ellipsis-vertical three-dots"></i>
         </div>
         </div>`;
         console.log(notes_view);

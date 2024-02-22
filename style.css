@@ -188,7 +188,7 @@
     font-size: 0.8rem;
 }
 
-.menu li{
+.menu {
     list-style: none;
     transform-origin: bottom right;
     transform: scale(0); 
@@ -202,7 +202,7 @@
 .bottom-content{
     position: relative;
 }
-.menu li i{
+.menu li{
      font-size: 0.8rem;
      margin: 3px;
 }
