@@ -1,13 +1,28 @@
-window.onload = () => {
-    function showmenu(ele,a) {
-        console.log(1);
-        ele.parentElement.style.transform = "scale(1)";
-        document.addEventListener("click", function (e) {
-            if (e.target.tagName != "I" || e.target != ele)
-                ele.style.transform = "scale(0)";
-        });
+window.addEventListener("load", () => {
+    let active_element = 0;
+
+    function assign_click(array) {
+        for (let index = 0; index < array.length; index++) {
+            var element = array[index];
+            element.addEventListener("click", () => {
+                let menu = document.querySelectorAll(".menu");
+                for (let i = 0; i < menu.length; i++) {
+                    menu[i].style.transform = "scale(0)";                    
+                }
+                document.querySelectorAll(".menu")[index].style.transform = "scale(1)";
+                active_element=index;
+            });
+        }
     }
-    // console.log("fuck");
+    function hide_menu(){
+     let array_of_menu=document.querySelectorAll(".menu");
+     for(let i=0;i<array_of_menu.length;i++)
+     array_of_menu[i].style.transform="scale(0)";
+    }
+    document.addEventListener("click",(e)=>{
+     if((e.target!=document.querySelectorAll(".datapoints")[active_element])||e.target.tagName!="I")
+     hide_menu();
+    });
     const add_new = document.querySelector("#box1");
     const cover = document.querySelector(".movement");
     const cross = document.querySelector(".cross");
@@ -36,7 +51,6 @@ window.onload = () => {
             let notes_view = JSON.parse(localStorage.getItem("notes"));
             console.log(notes_view.date_info);
             notes_view.forEach((val, index) => {
-                console.log(val);
                 let element = `          
                 <div class='box item'>
                 <div class="upper">
@@ -47,14 +61,15 @@ window.onload = () => {
                 <hr>
                 <span> ${val.date_info}</span>
                 <ul class="menu">
-                <li> <i class="fa-regular fa-trash-can">Delete</i></li>
-                <li><i class="fa-regular fa-pen-to-square">Edit</i></li>
+                <li> <i class="fa-regular fa-trash-can"><span class="options">Delete</span></i></li>
+                <li><i class="fa-regular fa-pen-to-square"><span class="options">Edit</span></i></li>
                 </ul>
-                <i class="fa-solid fa-ellipsis-vertical three-dots"></i>        
+                <i class="fa-solid fa-ellipsis-vertical three-dots datapoints"></i>        
                 </div>
                 </div>`;
                 document.getElementById("box1").insertAdjacentHTML("afterend", element);
             });
+            assign_click(document.querySelectorAll(".datapoints"));
         }
     }
     display();
@@ -74,15 +89,16 @@ window.onload = () => {
         <div class="bottom-content">
          <span> ${val.date_info}</span>
          <ul class="menu">
-         <li> <i class="fa-regular fa-trash-can">Delete</i></li>
-         <li><i class="fa-regular fa-pen-to-square">Edit</i></li>
+         <li> <i class="fa-regular fa-trash-can"><span class="options">Delete</span></i></li>
+         <li><i class="fa-regular fa-pen-to-square"><span class="options">Edit</span></i></li>
          </ul>
-         <i class="fa-solid fa-ellipsis-vertical three-dots"></i>
+         <i class="fa-solid fa-ellipsis-vertical three-dots datapoints"></i>
         </div>
         </div>`;
-        console.log(notes_view);
         document.getElementById("box1").insertAdjacentHTML("afterend", element);
+        assign_click(document.querySelectorAll(".datapoints"));
     }
+
     submit.addEventListener("click", () => {
         title.push(title_note.value);
         content.push(content_note.value);
@@ -109,8 +125,4 @@ window.onload = () => {
         content_note.value = "";
         cover.style.transform = "scale(0)";
     });
-
-    // menu
-
-    // document.addEventListener("click", (e) => { console.log(e.target) });
-}
+});

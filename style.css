@@ -186,6 +186,7 @@
 
 .bottom-content span {
     font-size: 0.8rem;
+    margin: 5px;
 }
 
 .menu {
@@ -197,20 +198,21 @@
     right: 0;
     padding: 2px;
     background: white;
-    box-shadow: 2px 2px 10px gray;
+    box-shadow: 2px 2px 10px rgb(35, 34, 34);
+    transition: 0.5s;
+    border-radius: 5px;
 }
 .bottom-content{
     position: relative;
 }
 .menu li{
      font-size: 0.8rem;
-     margin: 3px;
+     margin: 5px;
 }
 .menu li:hover{
     cursor: pointer;
-    background-color: gray;
+    background-color: rgb(163, 161, 161);
 }
 .options{
-    margin: 2px;
-    font-family: "Ubuntu";
+   font-family: "Ubuntu";
 }
