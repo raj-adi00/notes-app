@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
      array_of_menu[i].style.transform="scale(0)";
     }
     document.addEventListener("click",(e)=>{
-     if((e.target!=document.querySelectorAll(".datapoints")[active_element])||e.target.tagName!="I")
+     if((e.target!=document.querySelectorAll(".datapoints")[active_element]))
      hide_menu();
     });
     const add_new = document.querySelector("#box1");
@@ -61,8 +61,8 @@ window.addEventListener("load", () => {
                 <hr>
                 <span> ${val.date_info}</span>
                 <ul class="menu">
-                <li> <i class="fa-regular fa-trash-can"><span class="options">Delete</span></i></li>
-                <li><i class="fa-regular fa-pen-to-square"><span class="options">Edit</span></i></li>
+                <li> <i class="fa-regular fa-trash-can remove"><span class="options">Delete</span></i></li>
+                <li><i class="fa-regular fa-pen-to-square edit"><span class="options">Edit</span></i></li>
                 </ul>
                 <i class="fa-solid fa-ellipsis-vertical three-dots datapoints"></i>        
                 </div>
@@ -89,8 +89,8 @@ window.addEventListener("load", () => {
         <div class="bottom-content">
          <span> ${val.date_info}</span>
          <ul class="menu">
-         <li> <i class="fa-regular fa-trash-can"><span class="options">Delete</span></i></li>
-         <li><i class="fa-regular fa-pen-to-square"><span class="options">Edit</span></i></li>
+         <li> <i class="fa-regular fa-trash-can remove"><span class="options">Delete</span></i></li>
+         <li><i class="fa-regular fa-pen-to-square edit"><span class="options">Edit</span></i></li>
          </ul>
          <i class="fa-solid fa-ellipsis-vertical three-dots datapoints"></i>
         </div>
@@ -125,4 +125,7 @@ window.addEventListener("load", () => {
         content_note.value = "";
         cover.style.transform = "scale(0)";
     });
+
+
+    // Deleting notes
 });
