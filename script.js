@@ -7,21 +7,21 @@ window.addEventListener("load", () => {
             element.addEventListener("click", () => {
                 let menu = document.querySelectorAll(".menu");
                 for (let i = 0; i < menu.length; i++) {
-                    menu[i].style.transform = "scale(0)";                    
+                    menu[i].style.transform = "scale(0)";
                 }
                 document.querySelectorAll(".menu")[index].style.transform = "scale(1)";
-                active_element=index;
+                active_element = index;
             });
         }
     }
-    function hide_menu(){
-     let array_of_menu=document.querySelectorAll(".menu");
-     for(let i=0;i<array_of_menu.length;i++)
-     array_of_menu[i].style.transform="scale(0)";
+    function hide_menu() {
+        let array_of_menu = document.querySelectorAll(".menu");
+        for (let i = 0; i < array_of_menu.length; i++)
+            array_of_menu[i].style.transform = "scale(0)";
     }
-    document.addEventListener("click",(e)=>{
-     if((e.target!=document.querySelectorAll(".datapoints")[active_element]))
-     hide_menu();
+    document.addEventListener("click", (e) => {
+        if ((e.target != document.querySelectorAll(".datapoints")[active_element]))
+            hide_menu();
     });
     const add_new = document.querySelector("#box1");
     const cover = document.querySelector(".movement");
@@ -49,7 +49,7 @@ window.addEventListener("load", () => {
     function display() {
         if (localStorage.getItem("notes") != null) {
             let notes_view = JSON.parse(localStorage.getItem("notes"));
-            console.log(notes_view.date_info);
+            notes_view = Array.from(notes_view);
             notes_view.forEach((val, index) => {
                 let element = `          
                 <div class='box item'>
@@ -116,6 +116,7 @@ window.addEventListener("load", () => {
             notes = JSON.parse(localStorage.getItem("notes"));
             if (notes == null)
                 notes = [];
+            notes=Array.from(notes);
             notes.push(note_info);
             localStorage.setItem("notes", JSON.stringify(notes));
             show();
@@ -125,7 +126,4 @@ window.addEventListener("load", () => {
         content_note.value = "";
         cover.style.transform = "scale(0)";
     });
-
-
-    // Deleting notes
 });
