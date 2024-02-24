@@ -68,9 +68,15 @@ window.addEventListener("load", () => {
                 </div>
                 </div>`;
                 document.getElementById("box1").insertAdjacentHTML("afterend", element);
+                // document.getElementById('notes-field').lastChild.insertAdjacentHTML("afterend",element);
             });
             assign_click(document.querySelectorAll(".datapoints"));
         }
+        let deleteItems = document.querySelectorAll(".remove");
+        deleteItems = Array.from(deleteItems);
+        deleteItems.forEach((val) => {
+            val.addEventListener("click", () => { deleteNote(deleteItems.length - 1 - deleteItems.indexOf(val)) })
+        });
     }
     display();
 
@@ -97,6 +103,7 @@ window.addEventListener("load", () => {
         </div>`;
         document.getElementById("box1").insertAdjacentHTML("afterend", element);
         assign_click(document.querySelectorAll(".datapoints"));
+        location.reload();
     }
 
     submit.addEventListener("click", () => {
@@ -116,14 +123,30 @@ window.addEventListener("load", () => {
             notes = JSON.parse(localStorage.getItem("notes"));
             if (notes == null)
                 notes = [];
-            notes=Array.from(notes);
+            notes = Array.from(notes);
             notes.push(note_info);
             localStorage.setItem("notes", JSON.stringify(notes));
-            show();
+            // show();
+            location.reload();
         }
 
         title_note.value = "";
         content_note.value = "";
         cover.style.transform = "scale(0)";
     });
+    function deleteNote(index) {
+        console.log(index);
+        let notes_view = JSON.parse(localStorage.getItem("notes"));
+        notes_view = Array.from(notes_view);
+        notes_view.splice(index, 1);
+        //     let x=[];
+        //     for(let i=0;i<notes_view.length;i++)
+        //     if(i!=index)
+        //     x.push(notes_view[i]);
+        //    notes_view=[];
+        //    notes_view=x;
+        console.log(notes_view);
+        localStorage.setItem("notes", JSON.stringify(notes_view));
+        location.reload();
+    }
 });
