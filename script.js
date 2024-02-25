@@ -48,9 +48,15 @@ window.addEventListener("load", () => {
     // localStorage.clear();
     function display() {
         if (localStorage.getItem("notes") != null) {
+            console.log(localStorage.getItem("notes"));
             let notes_view = JSON.parse(localStorage.getItem("notes"));
             notes_view = Array.from(notes_view);
+            let counter = 1;
             notes_view.forEach((val, index) => {
+                if(val.heading=="")
+                val.heading="untitled";
+                 if(val.body=="")
+                 val.body="no body element";
                 let element = `          
                 <div class='box item'>
                 <div class="upper">
@@ -62,13 +68,15 @@ window.addEventListener("load", () => {
                 <span> ${val.date_info}</span>
                 <ul class="menu">
                 <li> <i class="fa-regular fa-trash-can remove"><span class="options">Delete</span></i></li>
-                <li><i class="fa-regular fa-pen-to-square edit"><span class="options">Edit</span></i></li>
+                <li><i class="fa-regular fa-pen-to-square edit" id="${counter++}"><span class="options">Edit</span></i></li>
                 </ul>
                 <i class="fa-solid fa-ellipsis-vertical three-dots datapoints"></i>        
                 </div>
-                </div>`;
+                </div>`;             
                 document.getElementById("box1").insertAdjacentHTML("afterend", element);
                 // document.getElementById('notes-field').lastChild.insertAdjacentHTML("afterend",element);
+                title_note.value = "";
+                content_note.value = "";
             });
             assign_click(document.querySelectorAll(".datapoints"));
         }
@@ -77,34 +85,9 @@ window.addEventListener("load", () => {
         deleteItems.forEach((val) => {
             val.addEventListener("click", () => { deleteNote(deleteItems.length - 1 - deleteItems.indexOf(val)) })
         });
+        edit_note();
     }
     display();
-
-    function show() {
-        let notes_view = JSON.parse(localStorage.getItem("notes"));
-        let last_index = notes_view.length - 1;
-        let val = notes_view[last_index];
-        let element = `
-        <div class='box item'>
-        <div class="upper">
-        <h5>${val.heading}</h5>
-        <p>${val.body}</p>
-        </div>
-        <div class="bottom">
-        <hr>
-        <div class="bottom-content">
-         <span> ${val.date_info}</span>
-         <ul class="menu">
-         <li> <i class="fa-regular fa-trash-can remove"><span class="options">Delete</span></i></li>
-         <li><i class="fa-regular fa-pen-to-square edit"><span class="options">Edit</span></i></li>
-         </ul>
-         <i class="fa-solid fa-ellipsis-vertical three-dots datapoints"></i>
-        </div>
-        </div>`;
-        document.getElementById("box1").insertAdjacentHTML("afterend", element);
-        assign_click(document.querySelectorAll(".datapoints"));
-        location.reload();
-    }
 
     submit.addEventListener("click", () => {
         title.push(title_note.value);
@@ -129,9 +112,6 @@ window.addEventListener("load", () => {
             // show();
             location.reload();
         }
-
-        title_note.value = "";
-        content_note.value = "";
         cover.style.transform = "scale(0)";
     });
     function deleteNote(index) {
@@ -139,14 +119,39 @@ window.addEventListener("load", () => {
         let notes_view = JSON.parse(localStorage.getItem("notes"));
         notes_view = Array.from(notes_view);
         notes_view.splice(index, 1);
-        //     let x=[];
-        //     for(let i=0;i<notes_view.length;i++)
-        //     if(i!=index)
-        //     x.push(notes_view[i]);
-        //    notes_view=[];
-        //    notes_view=x;
         console.log(notes_view);
         localStorage.setItem("notes", JSON.stringify(notes_view));
         location.reload();
+    }
+    function edit_note() {
+        let editables = document.querySelectorAll(".edit");
+        let stored_details = JSON.parse(localStorage.getItem("notes"));
+        editables.forEach((x) => {
+            x.addEventListener("click", () => {
+                cover.style.transform = "scale(1)";
+                let currentid = x.id;
+                console.log(currentid);
+                currentid = parseInt(currentid);
+                if (stored_details[currentid - 1].heading != null)
+                    document.getElementById("header").value = stored_details[currentid - 1].heading;
+                if (stored_details[currentid - 1].body != null)
+                    document.getElementById("content").value = stored_details[currentid - 1].body;
+                document.querySelector(".add-note").addEventListener("click", () => {
+
+                    stored_details.splice(currentid - 1, currentid - 1);
+                    dateobj = new Date();
+                    let month = months[dateobj.getMonth()];
+                    let year = dateobj.getFullYear();
+                    let date = dateobj.getDate();
+                    stored_details[currentid - 1] = {
+                        heading: title_note.value,
+                        body: content_note.value,
+                        date_info: date + ' ' + month + ' ' + year
+                    };
+                    console.log(stored_details);
+                    localStorage.setItem("notes", JSON.stringify(stored_details));
+                });
+            });
+        });
     }
 });
