@@ -39,7 +39,7 @@
     flex-wrap: wrap;
     column-gap: 5vw;
     row-gap: 10px;
-    min-height: 100vh;
+    min-height: 30vh;
 }
 
 .box {
@@ -192,8 +192,8 @@
 .menu {
     list-style: none;
     transform-origin: bottom right;
-    transform: scale(0); 
-    position: absolute; 
+    transform: scale(0);
+    position: absolute;
     bottom: 0;
     right: 0;
     padding: 2px;
@@ -202,17 +202,106 @@
     transition: 0.5s;
     border-radius: 5px;
 }
-.bottom-content{
+
+.bottom-content {
     position: relative;
 }
-.menu li{
-     font-size: 0.8rem;
-     margin: 5px;
+
+.menu li {
+    font-size: 0.8rem;
+    margin: 5px;
 }
-.menu li:hover{
+
+.menu li:hover {
     cursor: pointer;
     background-color: rgb(244, 234, 234);
 }
-.options{
-   font-family: "Ubuntu";
+
+.options {
+    font-family: "Ubuntu";
+}
+
+@media only screen and (max-width: 1100px) {
+    .box {
+        width: 18vw;
+        height: 18vw;
+    }
+}
+@media only screen and (max-width: 900px)
+{
+    .box{
+       min-width: 25vw;
+       min-height: 25vw;
+    }
+    #box1 div{
+        width: 10vw;
+    height: 10vw;
+    }
+    #pop-up{
+        min-width: 60vw;
+     }
+     #header{
+        min-width: 50vw;
+     }
+     #content{
+        min-width: 50vw;
+     }
+     .add-note{
+        width: 50vw;
+     }
+}
+@media only screen and (max-width: 650px)
+{
+    #greet{
+        font-size: 2rem;
+    }
+    #message{
+        font-size: 1rem;
+    }
+    .box{
+        min-width: 30vw;
+        min-height: 30vw;
+     }
+     #notes-field{
+        justify-content: space-evenly;
+        gap: 5px;
+     }
+}
+@media only screen and (max-width: 500px)
+{
+    #notes-field{
+        justify-content: space-around;
+        min-width: 35vw;
+        min-height: 35vw;
+    }
+    .box{
+        min-width: 45vw;
+        min-height: 45vw;
+        gap: 1rem;
+    }
+    .box.item h5{
+        font-size: 1rem;
+    }
+    #box1{
+        font-size: 1rem;
+    }
+    #pop-up{
+        min-width: 80vw;
+     }
+     #header{
+        min-width: 70vw;
+     }
+     #content{
+        min-width: 70vw;
+     }
+     .add-note{
+        width: 50vw;
+     }
+}
+@media only screen and (max-width: 400px)
+{
+    .box{
+        min-width: 70vw;
+        min-height: 70vw;
+    }
 }
